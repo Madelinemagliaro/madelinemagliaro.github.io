@@ -1,0 +1,149 @@
+<html>
+
+<head>
+  <title>Thermometer Lab</title>
+</head>
+
+<body>
+  <h1>Thermometer Lab</h1>
+  <div>
+    <svg version="1.1" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" height="50%" width="75%">
+      <style>
+        #glass {
+          fill: #ffffff;
+          stroke: #cccccc;
+          stroke-width: 3;
+        }
+
+        #container {
+          fill: #ffffff;
+          stroke: #000000;
+          stroke-width: 5;
+        }
+        #liquid{
+          fill: gradient;
+
+        }
+        #depth{
+          stroke-width: 2;
+          stroke: white;
+          fill: red;
+        }
+      </style>
+
+      <rect id="container" x="10" y="10" width="100" height="210" rx="15" />
+
+
+      <g id="glass">
+        <rect x="45" y="20" width="30" height="160" rx="15" />
+        <ellipse cx="60" cy="180" rx="30" ry="30" />
+        <rect x="46.5" y="22" width="27" height="165" rx="15" stroke="none" />
+        
+
+      </g>
+      <path d=" M 51 203 A 25 25 0 0 1 37 171" />
+      <g class="fill">
+        <rect id="heighttrack" x="49" y="25" width="22" height="160" rx="7" fill="red" stroke="none"/>
+        <ellipse id="bottomcircle" cx="60" cy="180" rx="28" ry="28" fill="red" stroke="none"/>
+      </g>
+      <g id="depth">
+        <path id= "depth1" d=" M 54 199 A 20 17 54 0 1 46 167"  />
+        <path id= "depth2" d=" M 50 164 A 20 17 54 0 1 67 163"  />
+      </g>
+      <rect x="80" y="25" width="10"height="4" fill="gray"/>
+      <rect x="80" y="39" width="20"height="4" fill="gray"/>
+      <rect x="80" y="53" width="10"height="4" fill="gray"/>
+      <rect x="80" y="67" width="20"height="4" fill="gray"/>
+      <rect x="80" y="81" width="10"height="4" fill="gray"/>
+      <rect x="80" y="95" width="20"height="4" fill="gray"/>
+      <rect x="80" y="109" width="10"height="4" fill="gray"/>
+      <rect x="80" y="123" width="20"height="4" fill="gray"/>
+      <rect x="80" y="137" width="10"height="4" fill="gray"/>
+      <rect x="80" y="151" width="20"height="4" fill="gray"/>
+
+      <text class="label" x="138" y="30" text-anchor="middle" id="num1">100</text>
+      <text class="label" x="138" y="60" text-anchor="middle" id="num2">80</text>
+      <text class="label" x="138" y="87" text-anchor="middle" id="num3">60</text>
+      <text class="label" x="138" y="117" text-anchor="middle" id="num4">40</text>
+      <text class="label" x="138" y="145" text-anchor="middle" id="num5">20</text>
+      
+    </svg>
+  
+  <div id="hello">
+    <input type="range" min="1" max="100" value="100" id="slider">
+  </div>
+  </div>
+  <fieldset>
+    <legend>Select to change unit of measure</legend>
+    <div>
+      <input type="radio" id="far" name="units" value="far" onchange="change_temp(cel)" checked/>
+      <label for="far"> fahrenheit </label>
+    </div>
+    <div>
+      <input type="radio" id="cel" name="units" value="cel" onchange="change_temp(far)" checked/>
+      <label for="cel"> celcius </label>
+    </div>
+    
+  </fieldset>
+  <script>
+    var ranges = document.getElementById("slider");
+    ranges.oninput = function(){
+      console.log(this.value)
+      document.getElementById("heighttrack").setAttribute("height", this.value);
+      var newval = (100 - parseInt(this.value))*1.3;
+      document.getElementById("heighttrack").setAttribute("y", parseInt(newval)+25);
+      document.getElementById("heighttrack").setAttribute("height", 160- parseInt(newval));
+      if(this.value >=1 && this.value <34){
+        document.getElementById("heighttrack").setAttribute("fill", "blue");
+        document.getElementById("bottomcircle").setAttribute("fill", "blue");
+        document.getElementById("depth1").setAttribute("fill", "blue")
+        document.getElementById("depth2").setAttribute("fill", "blue")
+    
+      } else if(this.value>=34 && this.value <64){
+        document.getElementById("heighttrack").setAttribute("fill", "orange");
+        document.getElementById("bottomcircle").setAttribute("fill", "orange");
+        document.getElementById("depth1").setAttribute("fill", "orange")
+        document.getElementById("depth2").setAttribute("fill", "orange")
+        
+      } else if(this.value >=64 && this.value <100){
+        document.getElementById("heighttrack").setAttribute("fill", "red");
+        document.getElementById("bottomcircle").setAttribute("fill", "red");
+        document.getElementById("depth1").setAttribute("fill", "red")
+        document.getElementById("depth2").setAttribute("fill", "red")
+      }
+    
+    
+    }
+    
+   
+    function change_temp(x){
+      if (x == cel){
+      var num1 = document.getElementById("num1")
+      num1.textContent = "212"
+      var num2 = document.getElementById("num2")
+      num2.textContent = "176"
+      var num3 = document.getElementById("num3")
+      num3.textContent = "140"
+      var num4 = document.getElementById("num4")
+      num4.textContent = "104"
+      var num5 = document.getElementById("num5")
+      num5.textContent = "68"
+      }
+      else if(x == far){
+        var num1 = document.getElementById("num1")
+      num1.textContent = "100"
+      var num2 = document.getElementById("num2")
+      num2.textContent = "80"
+      var num3 = document.getElementById("num3")
+      num3.textContent = "60"
+      var num4 = document.getElementById("num4")
+      num4.textContent = "40"
+      var num5 = document.getElementById("num5")
+      num5.textContent = "20"
+      }
+    }
+    
+  </script>
+</body>
+
+</html>
